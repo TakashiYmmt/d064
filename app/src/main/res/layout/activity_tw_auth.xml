@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLayout"
+    tools:context="jp.co.webshark.d064_alpha.twAuth">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="0dp">
+        <LinearLayout
+            android:id="@+id/logo_base"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_member"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:src="@drawable/d064"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="right">
+                <ImageView
+                    android:clickable="true"
+                    android:onClick="toMypage"
+                    android:src="@drawable/mypage_linkbtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_header"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/action_back"
+                    android:onClick="send_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/back"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:src="@drawable/tw_round"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/main_base"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <RelativeLayout
+                android:id="@+id/main_innner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_frame"
+                android:layout_gravity="center_horizontal">
+
+                <EditText
+                    android:id="@+id/inputText"
+                    android:layout_width="250dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="20dp"
+                    android:inputType="textMultiLine"
+                    android:minLines="4"
+                    android:maxLines="8"
+                    android:ems="10"
+                    android:textSize="7pt"
+                    android:padding="5dp"
+                    android:textColor="#000000"
+                    android:background="@drawable/border"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_centerHorizontal="true"/>
+
+                <jp.co.webshark.d064_alpha.customViews.HttpImageView
+                    android:id="@+id/imageProduct"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_below="@+id/inputText"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <CheckBox
+                    android:id="@+id/checkUpImage"
+                    android:layout_below="@+id/imageProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="この画像付きでツイート"
+                    android:checked="true"/>
+
+                <Button
+                    android:id="@+id/action_tweet"
+                    android:onClick="send_tweet"
+                    android:layout_below="@+id/checkUpImage"
+                    android:layout_width="250dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/tw_frame"
+                    android:text="　ツイートする"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="20dp"
+                    android:drawableLeft="@drawable/tw_icon"
+                    android:gravity="center_vertical|left|center_horizontal"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

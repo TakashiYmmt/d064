@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="jp.co.webshark.d064_alpha.productList">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+        <LinearLayout
+            android:id="@+id/logo_base"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_member"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ImageView
+                    android:src="@drawable/d064"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="right">
+                <ImageView
+                    android:clickable="true"
+                    android:onClick="toMypage"
+                    android:src="@drawable/mypage_linkbtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/header_base"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#2888bf"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/mini_logo"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/myname_icon"
+                    android:layout_marginLeft="15dp"/>
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_toRightOf="@+id/mini_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text=""
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_header"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/txtHeader1"
+                android:layout_below="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="売れ筋商品・サービスを"
+                android:layout_marginTop="5dp"
+                android:textSize="16sp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/txtHeader2"
+                android:layout_below="@+id/txtHeader1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="Twitter、Facebookで今すぐシェア♪"
+                android:layout_marginTop="2dp"
+                android:textSize="16sp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_base"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <RelativeLayout
+                android:id="@+id/main_innner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_frame">
+                <LinearLayout
+                    android:id="@+id/scroll_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="vertical" >
+                    <jp.co.webshark.d064_alpha.customViews.PagingListView
+                        android:id="@+id/listView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:drawSelectorOnTop="true"
+                        android:dividerHeight="0dip"
+                        android:scrollbars="none"
+                        android:fadingEdge="none"
+                        android:fadingEdgeLength="0dip"
+                        android:scrollingCache="false">
+                    </jp.co.webshark.d064_alpha.customViews.PagingListView>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

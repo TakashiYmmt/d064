@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="jp.co.webshark.d064_alpha.d064_login">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+        <LinearLayout
+            android:id="@+id/logo_base"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_member"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:src="@drawable/d064"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/header_base"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#2888bf"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="アフィリエイターログイン"
+                android:textSize="10pt"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_base"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="25dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <RelativeLayout
+                android:id="@+id/main_innner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_frame">
+
+                <ImageView
+                    android:id="@+id/login_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/login_img"/>
+                <TextView
+                    android:id="@+id/txtMail"
+                    android:layout_below="@+id/login_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="20dp"
+                    android:textColor="@android:color/black"
+                    android:text="メールアドレス"
+                    android:textSize="10pt" />
+
+                <EditText
+                    android:id="@+id/inputMail"
+                    android:layout_below="@+id/txtMail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:ems="10"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="4dp"
+                    android:background="@drawable/border"/>
+
+                <TextView
+                    android:id="@+id/txtPass"
+                    android:layout_below="@+id/inputMail"
+                    android:text="パスワード"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="10pt" />
+
+                <EditText
+                    android:id="@+id/inputPass"
+                    android:layout_below="@+id/txtPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:ems="10"
+                    android:padding="4dp"
+                    android:password="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/border"/>
+
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_below="@+id/inputPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:onClick=""
+                    android:background="@drawable/login_frame"
+                    android:text="ログイン"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtLink"
+                    android:layout_below="@+id/btnLogin"
+                    android:clickable="true"
+                    android:onClick="pass_remind"
+                    android:text="パスワードを忘れてしまった方はコチラ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:textColor="@android:color/holo_red_light"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="7pt" />
+
+                <Button
+                    android:id="@+id/btnJoin"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:onClick=""
+                    android:background="@drawable/link_frame"
+                    android:text="　　新規販売店登録　　＞"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
