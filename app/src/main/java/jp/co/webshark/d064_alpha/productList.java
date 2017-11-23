@@ -33,6 +33,8 @@ import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -113,12 +115,12 @@ public class productList extends Activity {
                 //ここにまだ読み込んでいない画象を追加したい時に処理を書く
             }
         });
-/*
-        //GoogleAnalytucs
+
+        // GoogleAnalytics
         Tracker t = ((UtilCommon)getApplication()).getTracker(UtilCommon.TrackerName.APP_TRACKER);
         t.setScreenName(this.getClass().getSimpleName());
-        t.send(new HitBuilders.AppViewBuilder().build());
-*/
+        //t.send(new AppViewBuilder().build());
+        t.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
 

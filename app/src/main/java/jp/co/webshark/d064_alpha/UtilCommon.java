@@ -1,8 +1,14 @@
 package jp.co.webshark.d064_alpha;
 
 import android.app.Application;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
+
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.HashMap;
 
@@ -10,7 +16,7 @@ import java.util.HashMap;
  * グローバル変数を扱うクラス
  * Created by sample on 2016/11/18.
  */
-public class UtilCommon extends Application {
+public class UtilCommon extends MultiDexApplication {
 
     private static final String TAG = "UtilCommon";
     private ProductData productData;
@@ -25,6 +31,11 @@ public class UtilCommon extends Application {
         super.onCreate();
         productData = null;
         imagesCache = new HashMap<>();
+    }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     /**
@@ -68,7 +79,7 @@ public class UtilCommon extends Application {
         GLOBAL_TRACKER, // Tracker used by all the apps from a company. eg: roll-up tracking.
         ECOMMERCE_TRACKER, // Tracker used by all ecommerce transactions from a company.
     }
-/*
+
     // GoogleAnalytics
     HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
 
@@ -85,5 +96,5 @@ public class UtilCommon extends Application {
         }
         return mTrackers.get(trackerId);
     }
-*/
+
 }

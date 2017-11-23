@@ -28,6 +28,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -88,6 +91,12 @@ public class twAuth extends Activity {
 
         EditText editView = (EditText)findViewById(R.id.inputText);
         editView.setText(common.getProduct().getSnsText1() + " " + common.getProduct().getSnsText2());
+
+        // GoogleAnalytics
+        Tracker t = ((UtilCommon)getApplication()).getTracker(UtilCommon.TrackerName.APP_TRACKER);
+        t.setScreenName(this.getClass().getSimpleName());
+        //t.send(new AppViewBuilder().build());
+        t.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
 

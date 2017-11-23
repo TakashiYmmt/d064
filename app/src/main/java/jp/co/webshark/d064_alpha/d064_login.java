@@ -17,6 +17,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.HitBuilders.AppViewBuilder;
+import com.google.android.gms.analytics.Tracker;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,6 +60,11 @@ public class d064_login extends Activity implements View.OnClickListener {
         //キーボード表示を制御するためのオブジェクト
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
+        // GoogleAnalytics
+        Tracker t = ((UtilCommon)getApplication()).getTracker(UtilCommon.TrackerName.APP_TRACKER);
+        t.setScreenName(this.getClass().getSimpleName());
+        //t.send(new AppViewBuilder().build());
+        t.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

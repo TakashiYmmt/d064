@@ -24,6 +24,8 @@ import com.facebook.login.LoginResult;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -132,14 +134,11 @@ public class fbShare extends Activity {
             }
         });
 
-        /*
-        Button fbButton = (Button)findViewById(R.id.action_share);
-        int btnHeignt = (int)commonFunction.convertDp2Px(40,getBaseContext());
-        Drawable leftDrawableFb = getResources().getDrawable(R.drawable.fb_icon);
-        leftDrawableFb.setBounds(btnHeignt/4, 0, btnHeignt, btnHeignt);
-        fbButton.setCompoundDrawables(leftDrawableFb, null, null, null);
-        fbButton.refreshDrawableState();
-        */
+        // GoogleAnalytics
+        Tracker t = ((UtilCommon)getApplication()).getTracker(UtilCommon.TrackerName.APP_TRACKER);
+        t.setScreenName(this.getClass().getSimpleName());
+        //t.send(new AppViewBuilder().build());
+        t.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
