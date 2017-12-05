@@ -35,6 +35,7 @@ import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -121,6 +122,9 @@ public class productList extends Activity {
         t.setScreenName(this.getClass().getSimpleName());
         //t.send(new AppViewBuilder().build());
         t.send(new HitBuilders.ScreenViewBuilder().build());
+
+        MyFirebaseInstanceIDService fbis = new MyFirebaseInstanceIDService();
+        fbis.onTokenRefresh();
     }
 
 
