@@ -124,6 +124,9 @@ public class productList extends Activity {
         //t.send(new AppViewBuilder().build());
         t.send(new HitBuilders.ScreenViewBuilder().build());
 
+        // FCMトークンは基本的に一回取ればOKらしいけど任意にコールできる
+        MyFirebaseInstanceIDService fd = new MyFirebaseInstanceIDService();
+        fd.onTokenRefresh();
     }
 
 
