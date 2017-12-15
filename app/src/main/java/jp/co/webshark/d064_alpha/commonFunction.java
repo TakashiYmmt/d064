@@ -46,6 +46,27 @@ public class commonFunction extends Application {
             e.printStackTrace();
         }
     }
+
+    public static void setPickupInfo(Context context, String productId){
+
+        OutputStream out;
+        try {
+            out = context.openFileOutput("pickup.info", MODE_PRIVATE);
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(out,"UTF-8"));
+
+            //上書きする
+            writer.println(productId);
+            writer.close();
+        } catch (IOException e) {
+            // TODO 自動生成された catch ブロック
+            e.printStackTrace();
+        }
+    }
+
+    public static void clearPickupInfo(Context context){
+        context.deleteFile("pickup.info");
+    }
+
     public static ArrayList<String> getUserInfo(Context context){
 
         InputStream in;
@@ -68,6 +89,39 @@ public class commonFunction extends Application {
                     return null;
                 }
             }
+            return result;
+        } catch (IOException e) {
+            // TODO 自動生成された catch ブロック
+            //e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String getPickupInfo(Context context){
+
+        InputStream in;
+        String lineBuffer;
+
+        try {
+            in = context.openFileInput("pickup.info");
+
+            File f1  = new File("pickup.info");
+            if( f1.exists() ){
+                return null;
+
+            }
+            BufferedReader reader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+            String result = new String();
+            while( (lineBuffer = reader.readLine()) != null ){
+                try {
+                    result = lineBuffer;
+                } catch (NumberFormatException e) {
+                    return null;
+                }
+            }
+            // 取れたら用なしなのでピックアップ情報はクリア
+            clearPickupInfo(context);
+
             return result;
         } catch (IOException e) {
             // TODO 自動生成された catch ブロック

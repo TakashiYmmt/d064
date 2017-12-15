@@ -47,8 +47,18 @@ public class d064_login extends Activity implements View.OnClickListener {
         // 販売店情報が取得できたら即時破棄してメイン画面へ
         ArrayList<String> userInfo = commonFunction.getUserInfo(getApplication().getBaseContext());
         if(userInfo != null && userInfo.size() == 2){
-            Intent intent = new Intent(d064_login.this,productList.class);
-            startActivity(intent);
+
+            // ピックアップ情報を取得
+            //String pickupBackup = commonFunction.getPickupInfo(getApplication().getBaseContext());
+
+            // インテント引数を取得
+            Intent intent = getIntent();
+            String pickupProduct = intent.getStringExtra("pickup");
+
+            Intent nextIntent = new Intent(d064_login.this,productList.class);
+            //nextIntent.putExtra("Pickup", pickupInfo);
+            nextIntent.putExtra("Pickup", pickupProduct);
+            startActivity(nextIntent);
             finish();
         }
         ((TextView)findViewById(R.id.txtLink)).setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);

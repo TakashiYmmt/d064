@@ -60,6 +60,7 @@ public class productList extends Activity {
 
     private LinearLayout scrollView;
     private String han_id;
+    private String pickupProduct;
 
     private AsyncPost productGetter;
 
@@ -68,11 +69,8 @@ public class productList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
-        //listView = (ListView) findViewById(R.id.listView1);
         listView = (PagingListView) findViewById(R.id.listView1);
-        //scrollView = (ScrollView) findViewById(R.id.scroll_body);
         scrollView = (LinearLayout) findViewById(R.id.scroll_body);
-        //scrollView.
 
         common = (UtilCommon)getApplication();
         productList = new ArrayList<ProductData>();
@@ -84,6 +82,13 @@ public class productList extends Activity {
         if(userInfo != null && userInfo.size() == 2){
             han_id = userInfo.get(0);
             ((TextView)findViewById(R.id.txtName)).setText(userInfo.get(1)+" 様（ID："+userInfo.get(0)+"）");
+        }
+
+        // インテント引数を取得
+        Intent intent = getIntent();
+        pickupProduct = intent.getStringExtra("Pickup");
+        if(pickupProduct != null){
+            Log.d("intent=",pickupProduct);
         }
 
         i = 0;
@@ -245,6 +250,17 @@ public class productList extends Activity {
                     if(strResult.equals("1")){
                         setProductList(result);
                         nowIndex = 0;
+
+                        // ピックアップ指定がある場合は初期値を変更する
+                        if(pickupProduct != null){
+                            for(int i = 0 ; i < productList.size() ; i++){
+                                if(productList.get(i).getId().equals(pickupProduct)){
+                                    nowIndex = i;
+                                    pickupProduct = null;
+                                }
+                            }
+                        }
+
                         drawProductList(nowIndex);
                         setProductGetter();
                     }else if(strResult.equals("0")){
@@ -319,9 +335,6 @@ public class productList extends Activity {
         }else{
             return;
         }
-
-        //listView.setTotalPage(productList.size());
-        //listView.setNowPage(0);
 
         listView.setTotalPage(minList.size());
         listView.setNowPage(position);
