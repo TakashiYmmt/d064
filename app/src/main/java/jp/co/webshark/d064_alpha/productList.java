@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -132,6 +133,19 @@ public class productList extends Activity {
         // FCMトークンは基本的に一回取ればOKらしいけど任意にコールできる
         MyFirebaseInstanceIDService fd = new MyFirebaseInstanceIDService();
         fd.onTokenRefresh();
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int winW = dm.widthPixels;
+        int winH = dm.heightPixels;
+        Log.i("MainActivity : ", "画面幅 = " + winW);
+        Log.i("MainActivity : ", "画面高さ = " + winH);
+
+        LinearLayout mainBase = (LinearLayout)findViewById(R.id.main_base);
+        int[] location = new int[2];
+        mainBase.getLocationOnScreen(location);
+        Log.i("MainActivity : ", "高さ = " + location[1]);
+        mainBase.setLayoutParams(new LinearLayout.LayoutParams(winW,winH - location[1] - 25));
     }
 
 
@@ -145,6 +159,18 @@ public class productList extends Activity {
             getProductList();
         }
 
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int winW = dm.widthPixels;
+        int winH = dm.heightPixels;
+        Log.i("MainActivity : ", "画面幅 = " + winW);
+        Log.i("MainActivity : ", "画面高さ = " + winH);
+
+        LinearLayout mainBase = (LinearLayout)findViewById(R.id.main_base);
+        int[] location = new int[2];
+        mainBase.getLocationOnScreen(location);
+        Log.i("MainActivity : ", "高さ = " + location[1]);
+        mainBase.setLayoutParams(new LinearLayout.LayoutParams(winW,winH - location[1] - 25));
     }
 
     private void loadProduct(int index){
@@ -209,6 +235,7 @@ public class productList extends Activity {
         common.setProduct(productList.get(nowIndex));
 
         Intent intent = new Intent(productList.this,twAuth.class);
+        intent.putExtra("Pickup", pickupProduct);
         startActivity(intent);
     }
 
@@ -222,6 +249,7 @@ public class productList extends Activity {
         common.setProduct(productList.get(nowIndex));
 
         Intent intent = new Intent(productList.this,fbShare.class);
+        intent.putExtra("Pickup", pickupProduct);
         startActivity(intent);
     }
     public void tempMessage(View view){

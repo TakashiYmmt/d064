@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -24,6 +25,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -48,6 +50,7 @@ public class fbShare extends Activity {
     private EditText editText;
     ShareDialog shareDialog;
     private AsyncPost accesChecker;
+    private String pickupProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,13 @@ public class fbShare extends Activity {
         common = (UtilCommon)getApplication();
         mCallbackURL = getString(R.string.twitter_callback_url);
         callbackManager = CallbackManager.Factory.create();
+
+        // インテント引数を取得
+        Intent intent = getIntent();
+        pickupProduct = intent.getStringExtra("Pickup");
+        if(pickupProduct != null){
+            Log.d("intent=",pickupProduct);
+        }
 
         //2.facebook利用する時のInitialize
         FacebookSdk.sdkInitialize(this);
@@ -169,6 +179,24 @@ public class fbShare extends Activity {
         if(userInfo != null && userInfo.size() == 2){
             han_id = userInfo.get(0);
         }
+
+        // GoogleAnalyticsにカスタム情報を発信
+        Tracker t = ((UtilCommon)getApplication()).getTracker(UtilCommon.TrackerName.APP_TRACKER);
+        //t.setScreenName(this.getClass().getSimpleName());
+
+        t.setScreenName("FB_H"+han_id);
+        t.send(new HitBuilders.ScreenViewBuilder().setCustomDimension(1, common.getProduct().getId()).build());
+
+        t.setScreenName("FB_B"+common.getProduct().getId());
+        t.send(new HitBuilders.ScreenViewBuilder().setCustomDimension(2,han_id).build());
+
+        if( common.getProduct().getId().equals(pickupProduct) ){
+            t.setScreenName("FB_AD");
+            t.send(new HitBuilders.ScreenViewBuilder().setCustomDimension(2,han_id).setCustomDimension(1, common.getProduct().getId()).build());
+        }
+
+        GoogleAnalytics.getInstance(this).dispatchLocalHits();
+
         String strURL = "https://www.yhvh.jp/af_banner/d064_app.php?entity=cmp&sns=fb&bid="+common.getProduct().getId()+"&hid="+han_id;
         HashMap<String,String> body = new HashMap<String,String>();
 

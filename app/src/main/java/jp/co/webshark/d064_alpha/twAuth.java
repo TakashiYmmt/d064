@@ -28,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -53,6 +54,7 @@ public class twAuth extends Activity {
     private RelativeLayout mainLayout;
     private EditText editText;
     private boolean withImage;
+    private String pickupProduct;
 
     private AsyncPost accesChecker;
 
@@ -72,6 +74,13 @@ public class twAuth extends Activity {
         mCallbackURL = getString(R.string.twitter_callback_url);
         mTwitter = TwitterUtils.getTwitterInstance(this);
         withImage = true;
+
+        // インテント引数を取得
+        Intent intent = getIntent();
+        pickupProduct = intent.getStringExtra("Pickup");
+        if(pickupProduct != null){
+            Log.d("intent=",pickupProduct);
+        }
 
         startAuthorize();
 
@@ -128,6 +137,24 @@ public class twAuth extends Activity {
         if(userInfo != null && userInfo.size() == 2){
             han_id = userInfo.get(0);
         }
+
+        // GoogleAnalyticsにカスタム情報を発信
+        Tracker t = ((UtilCommon)getApplication()).getTracker(UtilCommon.TrackerName.APP_TRACKER);
+        //t.setScreenName(this.getClass().getSimpleName());
+
+        t.setScreenName("TW_H"+han_id);
+        t.send(new HitBuilders.ScreenViewBuilder().setCustomDimension(1, common.getProduct().getId()).build());
+
+        t.setScreenName("TW_B"+common.getProduct().getId());
+        t.send(new HitBuilders.ScreenViewBuilder().setCustomDimension(2,han_id).build());
+
+        if( common.getProduct().getId().equals(pickupProduct) ){
+            t.setScreenName("TW_AD");
+            t.send(new HitBuilders.ScreenViewBuilder().setCustomDimension(2,han_id).setCustomDimension(1, common.getProduct().getId()).build());
+        }
+
+        GoogleAnalytics.getInstance(this).dispatchLocalHits();
+
         String strURL = "https://www.yhvh.jp/af_banner/d064_app.php?entity=cmp&sns=tw&bid="+common.getProduct().getId()+"&hid="+han_id;
         HashMap<String,String> body = new HashMap<String,String>();
 
@@ -207,7 +234,7 @@ public class twAuth extends Activity {
     /**
      * OAuth認証（厳密には認可）を開始します。
      *
-     * @param listener
+     * @@param listener
      */
     private void startAuthorize() {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
